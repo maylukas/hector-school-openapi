@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  version: 6.13.21
+  title: account-service
+paths:
+  /accounts/current:
+    get:
+      tags:
+        - AccountEndpoint
+      summary: Get account for the currently logged in user
+      operationId: getAccount
+      responses:
+        "200":
+          description: The account of the currently logged in users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+
+        "401":
+          description: If no user is logged in
+  /accounts:
+    post:
+      tags:
+        - AccountEndpoint
+      summary: Add an account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountDto"
+      responses:
+        201:
+          description: The account was created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+        400:
+          description: The request was invalid
+components:
+  schemas:
+    AccountDto:
+      type: object
+      required: [name, surname, email, birthDate]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        birthDate:
+          type: string
+          format: date
