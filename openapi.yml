@@ -52,6 +52,6 @@ components:
           type: string
         email:
           type: string
-        birthDate:
+        birthday:
           type: string
           format: date
